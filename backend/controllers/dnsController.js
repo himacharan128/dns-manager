@@ -37,4 +37,5 @@ const deleteDnsRecord = async (req, res) => {
   }
 };
 
+
 module.exports = { getDnsRecords, addDnsRecord, deleteDnsRecord };
