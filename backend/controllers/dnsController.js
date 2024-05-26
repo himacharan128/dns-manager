@@ -31,7 +31,7 @@ const addDnsRecord = async (req, res) => {
     return res.status(500).json({ message: 'Failed to add DNS record to Route 53' });
   }
 };
-
+ 
 
 const deleteDnsRecord = async (req, res) => {
   try {
@@ -40,13 +40,17 @@ const deleteDnsRecord = async (req, res) => {
     if (!record) {
       return res.status(404).json({ message: 'DNS record not found' });
     }
+    
     await deleteRecord(record.domain, record.type, record.value);
-    await record.remove();
+    await DnsRecord.deleteOne({ _id: id });
+    
     res.json({ message: 'DNS record deleted' });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
+
+
 
 
 module.exports = { getDnsRecords, addDnsRecord, deleteDnsRecord };
