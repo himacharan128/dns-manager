@@ -13,14 +13,25 @@ const getDnsRecords = async (req, res) => {
 const addDnsRecord = async (req, res) => {
   const { domain, type, value, ttl } = req.body;
   try {
-    const newRecord = new DnsRecord({ domain, type, value, ttl });
-    await newRecord.save();
-    await createRecord(domain, type, value, ttl); 
-    res.status(201).json(newRecord);
+    // add the record to Route 53
+    await createRecord(domain, type, value, ttl);
+    // If success then create MongoDB record
+    const existingRecord = await DnsRecord.findOne({ domain, type, value });
+    if (existingRecord) {
+      existingRecord.ttl = ttl;
+      await existingRecord.save();
+      return res.status(200).json(existingRecord);
+    } else {
+      const newRecord = new DnsRecord({ domain, type, value, ttl });
+      await newRecord.save();
+      return res.status(201).json(newRecord);
+    }
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    console.error(error);
+    return res.status(500).json({ message: 'Failed to add DNS record to Route 53' });
   }
 };
+
 
 const deleteDnsRecord = async (req, res) => {
   try {
