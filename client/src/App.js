@@ -4,6 +4,7 @@ import Dashboard from './components/Dashboard';
 import Login from './components/Login';
 import Register from './components/Register';
 import NavBar from './components/NavBar';
+import ProtectedRoute from './components/ProtectedRoute';
 import AuthProvider from './context/AuthContext';
 import './styles/styles.css';
 
@@ -13,9 +14,9 @@ const App = () => {
       <Router>
         <NavBar />
         <Routes>
-          <Route path="/" element={<Dashboard />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/" element={<ProtectedRoute element={Dashboard} />} />
         </Routes>
       </Router>
     </AuthProvider>
