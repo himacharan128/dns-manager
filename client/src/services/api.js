@@ -46,3 +46,8 @@ export const deleteDnsRecord = async (id) => {
   const response = await api.delete(`/dns/${id}`);
   return response.data;
 };
+
+export const addDnsRecordBulk = async (records) => {
+  const response = await api.post('/dns/bulk', records);
+  return response.data;
+};

@@ -31,11 +31,21 @@ const Dashboard = () => {
     setNotification({ message: 'DNS record deleted successfully', type: 'success' });
   };
 
+  const handleCloseNotification = () => {
+    setNotification({ message: '', type: '' });
+  };
+
   return (
     <div className="dashboard">
       <NavBar />
       <h1>DNS Manager Dashboard</h1>
-      {notification.message && <Notification message={notification.message} type={notification.type} />}
+      {notification.message && (
+        <Notification
+          message={notification.message}
+          type={notification.type}
+          onClose={handleCloseNotification}
+        />
+      )}
       <DnsRecordForm onAddRecord={handleAddRecord} />
       <DnsRecordTable records={records} onDeleteRecord={handleDeleteRecord} />
     </div>

@@ -4,8 +4,8 @@ import Dashboard from './components/Dashboard';
 import Login from './components/Login';
 import Register from './components/Register';
 import Homepage from './components/Homepage'
-import NavBar from './components/NavBar';
-import ProtectedRoute from './components/ProtectedRoute';
+// import NavBar from './components/NavBar';
+// import ProtectedRoute from './components/ProtectedRoute';
 import AuthProvider from './context/AuthContext';
 import './styles/styles.css';
 

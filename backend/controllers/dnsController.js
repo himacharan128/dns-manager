@@ -29,7 +29,6 @@ const addDnsRecord = async (req, res) => {
     return res.status(500).json({ message: 'Failed to add DNS record to Route 53' });
   }
 };
- 
 
 const deleteDnsRecord = async (req, res) => {
   try {
@@ -48,7 +47,32 @@ const deleteDnsRecord = async (req, res) => {
   }
 };
 
+const addDnsRecordsBulk = async (req, res) => {
+  const records = req.body;
+  try {
+    const savedRecords = [];
 
+    for (const record of records) {
+      const { domain, type, value, ttl } = record;
+      await createRecord(domain, type, value, ttl);
+      
+      const existingRecord = await DnsRecord.findOne({ domain, type, value });
+      if (existingRecord) {
+        existingRecord.ttl = ttl;
+        await existingRecord.save();
+        savedRecords.push(existingRecord);
+      } else {
+        const newRecord = new DnsRecord({ domain, type, value, ttl });
+        await newRecord.save();
+        savedRecords.push(newRecord);
+      }
+    }
 
+    res.status(201).json(savedRecords);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Failed to add DNS records to Route 53' });
+  }
+};
 
-module.exports = { getDnsRecords, addDnsRecord, deleteDnsRecord };
+module.exports = { getDnsRecords, addDnsRecord, deleteDnsRecord, addDnsRecordsBulk };

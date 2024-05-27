@@ -6,5 +6,6 @@ const auth = require('../middlewares/auth');
 router.get('/', auth, getDnsRecords);
 router.post('/', auth, addDnsRecord);
 router.delete('/:id', auth, deleteDnsRecord);
- 
+router.post('/bulk', addDnsRecordsBulk);
+
 module.exports = router;
