@@ -13,9 +13,40 @@ const Homepage = () => {
   }
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '10vh' }}>
-      <button onClick={login}>Login</button>
-      <button onClick={register}>Register</button>
+    <div style={{ 
+      display: 'flex', 
+      justifyContent: 'center', 
+      alignItems: 'center', 
+      height: '10vh' 
+    }}>
+      <button 
+        onClick={login} 
+        style={{ 
+          padding: '10px 20px', 
+          margin: '0 10px', 
+          cursor: 'pointer', 
+          backgroundColor: '#4CAF50', 
+          color: '#fff', 
+          border: 'none', 
+          borderRadius: '5px' 
+        }}
+      >
+        Login
+      </button>
+      <button 
+        onClick={register} 
+        style={{ 
+          padding: '10px 20px', 
+          margin: '0 10px', 
+          cursor: 'pointer', 
+          backgroundColor: '#2196F3', 
+          color: '#fff', 
+          border: 'none', 
+          borderRadius: '5px' 
+        }}
+      >
+        Register
+      </button>
     </div>
   );
 };

@@ -19,12 +19,37 @@ const Notification = ({ message, type, onClose }) => {
 
   return (
     isVisible && (
-      <div className={`notification ${type}`}>
+      <div 
+        className={`notification ${type}`} 
+        style={{ 
+          display: 'flex', 
+          justifyContent: 'space-between', 
+          alignItems: 'center',
+          padding: '10px', 
+          border: '1px solid #ddd',
+          margin: '10px auto', 
+          maxWidth: '400px', 
+          backgroundColor: '#f9f9f9' 
+        }}
+      >
         <span>{message}</span>
-        <button className="close-btn" onClick={handleClose}>X</button>
+        <button 
+          className="close-btn" 
+          onClick={handleClose} 
+          style={{ 
+            padding: '5px 10px', 
+            cursor: 'pointer', 
+            backgroundColor: '#f44336', 
+            color: '#fff', 
+            border: 'none' 
+          }}
+        >
+          X
+        </button>
       </div>
     )
   );
 };
 
 export default Notification;
+

@@ -46,9 +46,16 @@ const Dashboard = () => {
   }, []);
 
   const handleAddRecord = async (record) => {
-    const newRecord = await addDnsRecord(record);
-    setRecords([...records, newRecord]);
-    setNotification({ message: 'DNS record added successfully', type: 'success' });
+    try {
+      const newRecord = await addDnsRecord(record);
+      setRecords([...records, newRecord]);
+      setNotification({ message: 'DNS record added successfully', type: 'success' });
+    } catch (error) {
+      console.error('Failed to add DNS record:', error);
+      setNotification({ message: 'Failed to add DNS record', type: 'error' });
+    } finally {
+      setShowFormModal(false);
+    }
   };
 
   const handleDeleteRecord = async (id) => {
