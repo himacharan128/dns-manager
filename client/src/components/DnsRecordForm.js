@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { addDnsRecordBulk } from '../services/api';
+import Loading from './Loading';
 
 const DnsRecordForm = ({ onAddRecord }) => {
   const [formData, setFormData] = useState({ domain: '', type: 'A', value: '', ttl: 300 });
   const [file, setFile] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,6 +28,7 @@ const DnsRecordForm = ({ onAddRecord }) => {
       return;
     }
 
+    setLoading(true);
     const reader = new FileReader();
     reader.onload = async (event) => {
       const content = event.target.result;
@@ -45,6 +48,8 @@ const DnsRecordForm = ({ onAddRecord }) => {
       } catch (error) {
         console.error('Bulk upload failed:', error);
         alert('Bulk upload failed. Please check the file format.');
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -65,6 +70,7 @@ const DnsRecordForm = ({ onAddRecord }) => {
 
   return (
     <form onSubmit={handleSubmit}>
+      {loading && <Loading />}
       <input type="text" name="domain" value={formData.domain} onChange={handleChange} placeholder="Domain" required />
       <select name="type" value={formData.type} onChange={handleChange}>
         <option value="A">A</option>
@@ -81,7 +87,7 @@ const DnsRecordForm = ({ onAddRecord }) => {
       <input type="text" name="value" value={formData.value} onChange={handleChange} placeholder="Value" required />
       <input type="number" name="ttl" value={formData.ttl} onChange={handleChange} placeholder="TTL" required />
       <button type="submit">Add Record</button>
-      
+
       <input type="file" accept=".json, .csv" onChange={handleFileChange} />
       <button type="button" onClick={handleBulkUpload}>Bulk Upload</button>
     </form>
@@ -89,3 +95,4 @@ const DnsRecordForm = ({ onAddRecord }) => {
 };
 
 export default DnsRecordForm;
+
