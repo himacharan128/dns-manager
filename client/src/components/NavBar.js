@@ -10,21 +10,28 @@ const NavBar = () => {
     handleLogout();
     navigate('/homepage');
   };
-
+  const login=()=>{
+    navigate('/login');
+  }
+  const register=()=>{
+    navigate('/register');
+  }
   return (
     <nav>
-      <ul>
         {isAuthenticated ? (
-          <>
-            <li><button onClick={onLogout}>Logout</button></li>
-          </>
+          <button onClick={onLogout} style={{ float: 'right' }}>
+          Logout
+        </button>
         ) : (
           <>
-            <li><Link to="/login">Login</Link></li>
-            <li><Link to="/register">Register</Link></li>
+            <nav>
+              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '10vh' }}>
+                <button onClick={login}>Login</button>
+                <button onClick={register}>Register</button>
+              </div>
+            </nav>
           </>
         )}
-      </ul>
     </nav>
   );
 };
