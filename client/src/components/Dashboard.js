@@ -1,14 +1,14 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'; //useContext,
 import DnsRecordTable from './DnsRecordTable';
 import DnsRecordForm from './DnsRecordForm';
 import Notification from './Notification';
-import { AuthContext } from '../context/AuthContext';
+// import { AuthContext } from '../context/AuthContext';
 import { getDnsRecords, addDnsRecord, deleteDnsRecord } from '../services/api';
 import NavBar from './NavBar';
 import Loading from './Loading';
 
 const Dashboard = () => {
-  const { user } = useContext(AuthContext);
+  // const { user } = useContext(AuthContext);
   const [records, setRecords] = useState([]);
   const [loading, setLoading] = useState(true);
   const [notification, setNotification] = useState({ message: '', type: '' });
