@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getDnsRecords, addDnsRecord, deleteDnsRecord } = require('../controllers/dnsController');
+const { getDnsRecords, addDnsRecord, deleteDnsRecord, addDnsRecordsBulk } = require('../controllers/dnsController');
 const auth = require('../middlewares/auth');
 
 router.get('/', auth, getDnsRecords);
