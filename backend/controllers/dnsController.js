@@ -13,9 +13,7 @@ const getDnsRecords = async (req, res) => {
 const addDnsRecord = async (req, res) => {
   const { domain, type, value, ttl } = req.body;
   try {
-    // add the record to Route 53
     await createRecord(domain, type, value, ttl);
-    // If success then create MongoDB record
     const existingRecord = await DnsRecord.findOne({ domain, type, value });
     if (existingRecord) {
       existingRecord.ttl = ttl;
