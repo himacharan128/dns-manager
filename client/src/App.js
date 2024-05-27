@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Dashboard from './components/Dashboard';
 import Login from './components/Login';
 import Register from './components/Register';
+import Homepage from './components/Homepage'
 import NavBar from './components/NavBar';
 import ProtectedRoute from './components/ProtectedRoute';
 import AuthProvider from './context/AuthContext';
@@ -12,11 +13,13 @@ const App = () => {
   return (
     <AuthProvider>
       <Router>
-        <NavBar />
         <Routes>
+
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/" element={<ProtectedRoute element={Dashboard} />} />
+          <Route path="/" element={<Homepage />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          {/* <Route path="/dashboard" element={<ProtectedRoute element={Dashboard} />} /> */}
         </Routes>
       </Router>
     </AuthProvider>

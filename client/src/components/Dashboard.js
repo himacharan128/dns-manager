@@ -4,6 +4,7 @@ import DnsRecordForm from './DnsRecordForm';
 import Notification from './Notification';
 import { AuthContext } from '../context/AuthContext';
 import { getDnsRecords, addDnsRecord, deleteDnsRecord } from '../services/api';
+import NavBar from './NavBar';
 
 const Dashboard = () => {
   const { user } = useContext(AuthContext);
@@ -32,6 +33,7 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
+      <NavBar />
       <h1>DNS Manager Dashboard</h1>
       {notification.message && <Notification message={notification.message} type={notification.type} />}
       <DnsRecordForm onAddRecord={handleAddRecord} />

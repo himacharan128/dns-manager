@@ -13,7 +13,7 @@ const Register = () => {
     e.preventDefault();
     try {
       await handleRegister(name, email, password);
-      navigate('/');
+      navigate('/dashboard');
     } catch (error) {
       console.error('Registration failed', error);
     }
