@@ -69,28 +69,63 @@ const DnsRecordForm = ({ onAddRecord }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      {loading && <Loading />}
-      <input type="text" name="domain" value={formData.domain} onChange={handleChange} placeholder="Domain" required />
-      <select name="type" value={formData.type} onChange={handleChange}>
-        <option value="A">A</option>
-        <option value="AAAA">AAAA</option>
-        <option value="CNAME">CNAME</option>
-        <option value="MX">MX</option>
-        <option value="NS">NS</option>
-        <option value="PTR">PTR</option>
-        <option value="SOA">SOA</option>
-        <option value="SRV">SRV</option>
-        <option value="TXT">TXT</option>
-        <option value="DNSSEC">DNSSEC</option>
-      </select>
-      <input type="text" name="value" value={formData.value} onChange={handleChange} placeholder="Value" required />
-      <input type="number" name="ttl" value={formData.ttl} onChange={handleChange} placeholder="TTL" required />
-      <button type="submit">Add Record</button>
+<form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '15px', width: '100%', maxWidth: '500px', margin: '0 auto', padding: '20px', border: '1px solid #ccc', borderRadius: '10px', backgroundColor: '#f9f9f9' }}>
+  {loading && <Loading />}
+  <input
+    type="text"
+    name="domain"
+    value={formData.domain}
+    onChange={handleChange}
+    placeholder="Domain"
+    required
+    style={{ padding: '10px', width: '100%', borderRadius: '5px', border: '1px solid #ccc' }}
+  />
+  <select
+    name="type"
+    value={formData.type}
+    onChange={handleChange}
+    style={{ padding: '10px', width: '100%', borderRadius: '5px', border: '1px solid #ccc' }}
+  >
+    <option value="A">A</option>
+    <option value="AAAA">AAAA</option>
+    <option value="CNAME">CNAME</option>
+    <option value="MX">MX</option>
+    <option value="NS">NS</option>
+    <option value="PTR">PTR</option>
+    <option value="SOA">SOA</option>
+    <option value="SRV">SRV</option>
+    <option value="TXT">TXT</option>
+    <option value="DNSSEC">DNSSEC</option>
+  </select>
+  <input
+    type="text"
+    name="value"
+    value={formData.value}
+    onChange={handleChange}
+    placeholder="Value"
+    required
+    style={{ padding: '10px', width: '100%', borderRadius: '5px', border: '1px solid #ccc' }}
+  />
+  <input
+    type="number"
+    name="ttl"
+    value={formData.ttl}
+    onChange={handleChange}
+    placeholder="TTL"
+    required
+    style={{ padding: '10px', width: '100%', borderRadius: '5px', border: '1px solid #ccc' }}
+  />
+  <button type="submit" style={{ padding: '10px 20px', borderRadius: '5px', border: 'none', backgroundColor: '#4CAF50', color: '#fff', cursor: 'pointer' }}>Add Record</button>
 
-      <input type="file" accept=".json, .csv" onChange={handleFileChange} />
-      <button type="button" onClick={handleBulkUpload}>Bulk Upload</button>
-    </form>
+  <input
+    type="file"
+    accept=".json, .csv"
+    onChange={handleFileChange}
+    style={{ padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }}
+  />
+  <button type="button" onClick={handleBulkUpload} style={{ padding: '10px 20px', borderRadius: '5px', border: 'none', backgroundColor: '#2196F3', color: '#fff', cursor: 'pointer' }}>Bulk Upload</button>
+</form>
+
   );
 };
 

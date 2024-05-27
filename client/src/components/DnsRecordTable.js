@@ -10,15 +10,16 @@ const DnsRecordTable = ({ records, onDeleteRecord }) => {
   });
 
   return (
-    <div>
-      <div>
+    <div style={{ margin: '20px 0' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginBottom: '20px' }}>
         <input
           type="text"
           placeholder="Search by domain..."
           value={searchTerm}
           onChange={e => setSearchTerm(e.target.value)}
+          style={{ padding: '10px', width: '200px' }}
         />
-        <select value={filterType} onChange={e => setFilterType(e.target.value)}>
+        <select value={filterType} onChange={e => setFilterType(e.target.value)} style={{ padding: '10px', width: '200px' }}>
           <option value="">All Types</option>
           <option value="A">A</option>
           <option value="AAAA">AAAA</option>
@@ -32,25 +33,25 @@ const DnsRecordTable = ({ records, onDeleteRecord }) => {
           <option value="DNSSEC">DNSSEC</option>
         </select>
       </div>
-      <table>
+      <table style={{ width: '100%', borderCollapse: 'collapse' }}>
         <thead>
-          <tr>
-            <th>Domain</th>
-            <th>Type</th>
-            <th>Value</th>
-            <th>TTL</th>
-            <th>Actions</th>
+          <tr style={{ backgroundColor: '#f2f2f2' }}>
+            <th style={{ padding: '10px', border: '1px solid #ddd' }}>Domain</th>
+            <th style={{ padding: '10px', border: '1px solid #ddd' }}>Type</th>
+            <th style={{ padding: '10px', border: '1px solid #ddd' }}>Value</th>
+            <th style={{ padding: '10px', border: '1px solid #ddd' }}>TTL</th>
+            <th style={{ padding: '10px', border: '1px solid #ddd' }}>Actions</th>
           </tr>
         </thead>
         <tbody>
           {filteredRecords.map((record) => (
             <tr key={record._id}>
-              <td>{record.domain}</td>
-              <td>{record.type}</td>
-              <td>{record.value}</td>
-              <td>{record.ttl}</td>
-              <td>
-                <button onClick={() => onDeleteRecord(record._id)}>Delete</button>
+              <td style={{ padding: '10px', border: '1px solid #ddd' }}>{record.domain}</td>
+              <td style={{ padding: '10px', border: '1px solid #ddd' }}>{record.type}</td>
+              <td style={{ padding: '10px', border: '1px solid #ddd' }}>{record.value}</td>
+              <td style={{ padding: '10px', border: '1px solid #ddd' }}>{record.ttl}</td>
+              <td style={{ padding: '10px', border: '1px solid #ddd', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                <button onClick={() => onDeleteRecord(record._id)} style={{ padding: '5px 10px', cursor: 'pointer', backgroundColor: '#f44336', color: '#fff', border: 'none' }}>Delete</button>
               </td>
             </tr>
           ))}

@@ -22,7 +22,7 @@ const NavBar = () => {
   return (
     <nav>
       {isAuthenticated ? (
-        <button onClick={onLogout} style={{ float: 'right' }}>
+        <button onClick={onLogout} style={{ backgroundColor: '#f44336', color: '#fff',float: 'right' }}>
           Logout
         </button>
       ) : (
