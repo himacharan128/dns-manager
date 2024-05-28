@@ -1,0 +1,14 @@
+domain,type,value,ttl
+example1.mytestdomain.com,AAAA,2607:f0d0:1002:51::4,300
+example2.mytestdomain.com,CNAME,mytestdomain.com,300
+example11.mytestdomain.com,AAAA,2617:f0d0:1002:51::4,300
+example3.mytestdomain.com,MX,10 mail.mytestdomain.com,300
+example4.mytestdomain.com,NS,ns1.mytestdomain.com,300
+3.4.0.192.in-addr.mytestdomain.com,PTR,mytestdomain.com,300
+example5.mytestdomain.com,NS,ns2.mytestdomain.com,302
+example6.mytestdomain.com,MX,15 mail2.mytestdomain.com,295
+t2.mytestdomain.com,NS,ns3.mytestdomain.com,332
+example7.mytestdomain.com,AAAA,2406:0db8:85a3:0002:0002:8a2e:0370:abcd,300
+example8.mytestdomain.com,CNAME,www.mytestdomain.com,300
+5.6.0.192.in-addr.mytestdomain.com,PTR,mytestdomain.com,300
+example18.mytestdomain.com,CNAME,www.mytestdomain.com,300
