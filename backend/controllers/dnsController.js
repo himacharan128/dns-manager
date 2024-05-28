@@ -13,22 +13,21 @@ const getDnsRecords = async (req, res) => {
 const addDnsRecord = async (req, res) => {
   const { domain, type, value, ttl } = req.body;
   try {
-    await createRecord(domain, type, value, ttl);
     const existingRecord = await DnsRecord.findOne({ domain, type, value });
     if (existingRecord) {
-      existingRecord.ttl = ttl;
-      await existingRecord.save();
-      return res.status(200).json(existingRecord);
-    } else {
-      const newRecord = new DnsRecord({ domain, type, value, ttl });
-      await newRecord.save();
-      return res.status(201).json(newRecord);
+      return res.status(409).json({ message: 'Duplicate entry' });
     }
+
+    await createRecord(domain, type, value, ttl);
+    const newRecord = new DnsRecord({ domain, type, value, ttl });
+    await newRecord.save();
+    return res.status(201).json(newRecord);
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: 'Failed to add DNS record to Route 53' });
   }
 };
+
 
 const deleteDnsRecord = async (req, res) => {
   try {
@@ -49,23 +48,29 @@ const deleteDnsRecord = async (req, res) => {
 
 const addDnsRecordsBulk = async (req, res) => {
   const records = req.body;
-  try {
-    const savedRecords = [];
+  const savedRecords = [];
+  const duplicateEntries = [];
 
+  try {
     for (const record of records) {
       const { domain, type, value, ttl } = record;
-      await createRecord(domain, type, value, ttl);
-      
       const existingRecord = await DnsRecord.findOne({ domain, type, value });
       if (existingRecord) {
-        existingRecord.ttl = ttl;
-        await existingRecord.save();
-        savedRecords.push(existingRecord);
+        duplicateEntries.push(record);
       } else {
+        await createRecord(domain, type, value, ttl);
         const newRecord = new DnsRecord({ domain, type, value, ttl });
         await newRecord.save();
         savedRecords.push(newRecord);
       }
+    }
+
+    if (duplicateEntries.length > 0) {
+      return res.status(207).json({
+        message: `${duplicateEntries.length} duplicate entries found`,
+        savedRecords,
+        duplicateEntries,
+      });
     }
 
     res.status(201).json(savedRecords);
@@ -74,5 +79,6 @@ const addDnsRecordsBulk = async (req, res) => {
     res.status(500).json({ message: 'Failed to add DNS records to Route 53' });
   }
 };
+
 
 module.exports = { getDnsRecords, addDnsRecord, deleteDnsRecord, addDnsRecordsBulk };

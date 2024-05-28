@@ -30,7 +30,6 @@ const DnsRecordTable = ({ records, onDeleteRecord }) => {
           <option value="SOA">SOA</option>
           <option value="SRV">SRV</option>
           <option value="TXT">TXT</option>
-          <option value="DNSSEC">DNSSEC</option>
         </select>
       </div>
       <table style={{ width: '100%', borderCollapse: 'collapse' }}>

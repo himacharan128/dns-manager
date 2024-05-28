@@ -22,8 +22,6 @@ import {
 } from 'chart.js';
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement);
 
-
-
 const Dashboard = () => {
   const [records, setRecords] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -51,12 +49,16 @@ const Dashboard = () => {
       setRecords([...records, newRecord]);
       setNotification({ message: 'DNS record added successfully', type: 'success' });
     } catch (error) {
-      console.error('Failed to add DNS record:', error);
-      setNotification({ message: 'Failed to add DNS record', type: 'error' });
+      if (error.response && error.response.status === 409) {
+        setNotification({ message: 'Duplicate entry', type: 'error' });
+      } else {
+        setNotification({ message: 'Failed to add DNS record', type: 'error' });
+      }
     } finally {
       setShowFormModal(false);
     }
   };
+  
 
   const handleDeleteRecord = async (id) => {
     await deleteDnsRecord(id);
@@ -147,16 +149,18 @@ const Dashboard = () => {
           <DnsRecordTable records={records} onDeleteRecord={handleDeleteRecord} />
           
           <Modal show={showModal} onClose={() => setShowModal(false)}>
-            <div style={{ width: '100%', margin: '20px 0' }}>
-              <h2 style={{ textAlign: 'center' }}>Domain Distribution</h2>
-              <div style={{ width: '100%', height: '300px' }}>
-                <Bar data={domainChartData} options={{ maintainAspectRatio: false }} />
+            <div style={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', margin: '20px 0' }}>
+              <div style={{ width: '45%', margin: '20px 0' }}>
+                <h2 style={{ textAlign: 'center' }}>Domain Distribution</h2>
+                <div style={{ width: '100%', height: '300px' }}>
+                  <Bar data={domainChartData} options={{ maintainAspectRatio: false }} />
+                </div>
               </div>
-            </div>
-            <div style={{ width: '100%', margin: '20px 0' }}>
-              <h2 style={{ textAlign: 'center' }}>Record Type Distribution</h2>
-              <div style={{ width: '100%', height: '300px' }}>
-                <Pie data={typeChartData} options={{ maintainAspectRatio: false }} />
+              <div style={{ width: '45%', margin: '20px 0' }}>
+                <h2 style={{ textAlign: 'center' }}>Record Type Distribution</h2>
+                <div style={{ width: '100%', height: '300px' }}>
+                  <Pie data={typeChartData} options={{ maintainAspectRatio: false }} />
+                </div>
               </div>
             </div>
           </Modal>
