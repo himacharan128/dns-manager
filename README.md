@@ -5,7 +5,11 @@ DNS Manager is a web application for managing DNS records on AWS Route 53 using 
 - Add DNS records for various domains.
 - Delete existing DNS records.
 - View a dashboard with visual representations of domain and record type distributions.
-- Bulk upload DNS records from JSON or CSV files.
+- Bulk upload DNS records from JSON or CSV files. sample files
+```
+  https://github.com/himacharan128/dns-manager/blob/main/doc.json
+  https://github.com/himacharan128/dns-manager/blob/main/Untitled.csv
+```
 ## File Structure
    ```
 dns-manager/
