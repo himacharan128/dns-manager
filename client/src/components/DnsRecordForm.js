@@ -26,12 +26,28 @@ const DnsRecordForm = ({ onAddRecord, onCloseModal }) => {
     return patterns[type] ? patterns[type].test(value) : true;
   };
 
+  const getExampleValue = (type) => {
+    const examples = {
+      A: '192.168.0.1',
+      AAAA: '2001:0db8:85a3:0000:0000:8a2e:0370:7334',
+      CNAME: 'mytestdomain.com',
+      MX: '10 mytestdomain.com',
+      NS: 'ns1.mytestdomain.com',
+      PTR: 'mytestdomain.com',
+    };
+
+    return examples[type] || 'a valid value';
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setLoading(true);
 
     if (!validateValue(formData.type, formData.value)) {
-      setError('Invalid value for the selected record type.');
+      const exampleValue = getExampleValue(formData.type);
+      setError(`Invalid value for the selected record type. Example value: ${exampleValue}`);
+      setLoading(false);
       return;
     }
 
@@ -42,6 +58,8 @@ const DnsRecordForm = ({ onAddRecord, onCloseModal }) => {
     } catch (error) {
       console.error('Failed to add DNS record:', error);
       setError('Failed to add DNS record. Please check your input and try again.');
+    }finally {
+      setLoading(false);
     }
   };
 

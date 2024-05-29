@@ -1,7 +1,8 @@
 import axios from 'axios';
 // require('dotenv').config();
 
-const API_BASE_URL =  "https://dns-manager-nnrh.onrender.com/api";//"http://localhost:5000/api"  //process.env.BACKEND_BASE_URL;
+const API_BASE_URL =  "https://dns-manager-nnrh.onrender.com/api";
+// const API_BASE_URL = "http://localhost:5000/api"  //process.env.BACKEND_BASE_URL;
 
 const api = axios.create({
   baseURL: API_BASE_URL,
