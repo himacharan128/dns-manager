@@ -1,0 +1,44 @@
+[
+  {
+    "domain": "test114.mytestdomain.com",
+    "type": "AAAA",
+    "value": "2521:0db8:85a3:0001:0001:8a2e:0370:1234",
+    "ttl": 300
+  },
+  {
+    "domain": "test123.mytestdomain.com",
+    "type": "AAAA",
+    "value": "2521:0db8:85a3:0001:0001:8a2e:0370:5678",
+    "ttl": 300
+  },
+  {
+    "domain": "test135.mytestdomain.com",
+    "type": "AAAA",
+    "value": "2521:0db8:85a3:0001:0001:8a2e:0370:abcd",
+    "ttl": 300
+  },
+  {
+    "domain": "test147.mytestdomain.com",
+    "type": "AAAA",
+    "value": "2521:0db8:85a3:0001:0001:8a2e:0370:ef12",
+    "ttl": 300
+  },
+  {
+    "domain": "test158.mytestdomain.com",
+    "type": "AAAA",
+    "value": "2521:0db8:85a3:0001:0001:8a2e:0370:3456",
+    "ttl": 300
+  },
+  {
+    "domain": "test169.mytestdomain.com",
+    "type": "AAAA",
+    "value": "2521:0db8:85a3:0001:0001:8a2e:0370:7890",
+    "ttl": 300
+  },
+  {
+    "domain": "test172.mytestdomain.com",
+    "type": "AAAA",
+    "value": "2521:0db8:85a3:0001:0001:8a2e:0370:cdef",
+    "ttl": 300
+  }
+]
